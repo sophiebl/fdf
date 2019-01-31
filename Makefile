@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2019/01/31 14:48:31 by vimucchi         ###   ########.fr        #
+#    Updated: 2019/01/31 15:13:09 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = fdf
 SRC_PATH = ./
 OBJ_PATH = ./
 INC = -I /usr/local/include
-LDFLAGS = -L /usr/local/lib/
-LDLIBS = -lmlx -framework OpenGL -framework AppKit
+LDFLAGS = -L /usr/local/lib/ -L ./libft
+LDLIBS = -lmlx -framework OpenGL -framework AppKit -lft
 CFLAGS = -Wall -Wextra -Werror 
 CC = gcc
 SRC = n_window.c \

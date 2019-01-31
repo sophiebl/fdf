@@ -1,10 +1,5 @@
 #include "fdf.h"
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 int		deal_key(int key, t_mlx *param)
 {
 	ft_putchar(key + 97);
@@ -22,6 +17,7 @@ int		main()
 	void	*mlx_wdw;
 	int		i;
 	t_mlx	*param;
+	char	*test;
 	
 	mlx_ptr = mlx_init();
 	mlx_wdw = mlx_new_window(mlx_ptr, 1000, 600, "Hello World!");
@@ -37,6 +33,8 @@ int		main()
 	param->ptr = mlx_ptr;
 	param->wdw = mlx_wdw;
 
+	ft_putstr("Hello");
+	get_next_line(0, &test);
 	mlx_key_hook(mlx_wdw, deal_key, param);
 	mlx_loop(mlx_ptr);
 	return (0);

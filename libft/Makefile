@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/28 15:20:11 by vimucchi          #+#    #+#              #
-#    Updated: 2018/12/29 21:17:17 by vimucchi         ###   ########.fr        #
+#    Updated: 2019/01/31 15:11:07 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,8 @@ SRC = \
 						ft_strlcpy.c \
 						ft_power.c \
 						ft_sort_tab.c \
-						ft_isspace.c
+						ft_isspace.c \
+						get_next_line.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -86,7 +87,7 @@ all: $(NAME)
 %.o: %.c 
 	@$(CC) $(FLAGS) -Iincludes -o $@ -c $<
 
-$(NAME): $(OBJ) includes/libft.h
+$(NAME): $(OBJ) includes/libft.h includes/get_next_line.h
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
