@@ -33,8 +33,6 @@ int		main()
 	param->ptr = mlx_ptr;
 	param->wdw = mlx_wdw;
 
-	ft_putstr("Hello");
-	get_next_line(0, &test);
 	mlx_key_hook(mlx_wdw, deal_key, param);
 	mlx_loop(mlx_ptr);
 	return (0);
