@@ -7,5 +7,5 @@ typedef struct		s_mlx
 {
 	void			*ptr;
 	void			*wdw;
-	struct s_param	*next;
+	struct s_mlx	*next;
 }					t_mlx;
