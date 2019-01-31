@@ -7,11 +7,14 @@ void	ft_putchar(char c)
 
 int		deal_key(int key, void *param)
 {
+	t_mlx	*tmp;
+
+	tmp = param;
+	printf("tmp:%p:%p\n",tmp->ptr, tmp->wdw);	
 	ft_putchar(key + 97);
-	if (key == 85)
+	if (1)
 	{
-		mlx_string_put(&param[0], &param[1], 130, 250, 16678812, "Touche U");
-	
+		mlx_string_put(tmp->ptr, tmp->wdw, 130, 250, 16678812, "Touche U");
 	}
 	return (0);
 }
@@ -22,7 +25,7 @@ int		main()
 	void	*mlx_ptr;
 	void	*mlx_wdw;
 	int		i;
-	void	**param;
+	t_mlx	*param;
 	
 	mlx_ptr = mlx_init();
 	mlx_wdw = mlx_new_window(mlx_ptr, 1000, 600, "Hello World!");
@@ -35,11 +38,11 @@ int		main()
 		i++;
 	}
 
-	param = malloc(sizeof(void *) * 3);
-	param[0] = mlx_ptr;
-	param[1] = mlx_wdw;
-	param[2] = 0;
-	
+	printf("mlx:%p:%p\n",mlx_ptr, mlx_wdw);
+	param = malloc(sizeof(t_mlx));
+	param->ptr = mlx_ptr;
+	param->wdw = mlx_wdw;
+		
 	mlx_key_hook(mlx_wdw, deal_key, param);
 	mlx_loop(mlx_ptr);
 	return (0);
