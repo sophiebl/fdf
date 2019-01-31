@@ -5,16 +5,12 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-int		deal_key(int key, void *param)
+int		deal_key(int key, t_mlx *param)
 {
-	t_mlx	*tmp;
-
-	tmp = param;
-	printf("tmp:%p:%p\n",tmp->ptr, tmp->wdw);	
 	ft_putchar(key + 97);
 	if (1)
 	{
-		mlx_string_put(tmp->ptr, tmp->wdw, 130, 250, 16678812, "Touche U");
+		mlx_string_put(param->ptr, param->wdw, 130, 250, 16678812, "Touche U");
 	}
 	return (0);
 }
@@ -37,12 +33,10 @@ int		main()
 		mlx_pixel_put(mlx_ptr, mlx_wdw, 101, i, 65535);
 		i++;
 	}
-
-	printf("mlx:%p:%p\n",mlx_ptr, mlx_wdw);
 	param = malloc(sizeof(t_mlx));
 	param->ptr = mlx_ptr;
 	param->wdw = mlx_wdw;
-		
+
 	mlx_key_hook(mlx_wdw, deal_key, param);
 	mlx_loop(mlx_ptr);
 	return (0);
