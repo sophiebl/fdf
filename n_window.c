@@ -11,13 +11,12 @@ int		deal_key(int key, t_mlx *param)
 }
 
 
-int		main()
+int		n_window(void)
 {
 	void	*mlx_ptr;
 	void	*mlx_wdw;
 	int		i;
 	t_mlx	*param;
-	char	*test;
 	
 	mlx_ptr = mlx_init();
 	mlx_wdw = mlx_new_window(mlx_ptr, 1000, 600, "Hello World!");
