@@ -66,19 +66,21 @@ int		**ft_get_tab(t_line *lst)
 		j++;
 		lst = lst->next;
 	}
+	tab[j] = 0;
 	printf("\n----End lst to tab-----\n");
 	j = 0;
 	printf("nb_col:%d, nb_line:%d\n",nb_col, nb_line);
-	while (j < nb_col)
+	while (j < nb_line)
 	{
+		printf("j:%d i:%d - ", j, i);
 		i  = 0;
-		while(i < nb_line)
+		while(i < nb_col)
 		{
 			printf("%d ", tab[j][i]);
 			i++;
 		}
 		j++;
-		printf("- Line %d\n", j);
+		printf("\n");
 	}
 	printf("----Back to the main-----\n");
 	return (tab);
