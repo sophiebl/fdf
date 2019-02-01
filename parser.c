@@ -41,6 +41,7 @@ int		**ft_get_tab(t_line *lst)
 	int		**tab;
 
 	nb_line = 0;
+	nb_col = lst->nb_col;
 	tmp = lst;
 	while (tmp->next)
 	{
@@ -67,11 +68,11 @@ int		**ft_get_tab(t_line *lst)
 	}
 	printf("\n----End lst to tab-----\n");
 	j = 0;
-	nb_col = lst->nb_col;
-	while (j < 11)
+	printf("nb_col:%d, nb_line:%d\n",nb_col, nb_line);
+	while (j < nb_col)
 	{
 		i  = 0;
-		while(i < 19)
+		while(i < nb_line)
 		{
 			printf("%d ", tab[j][i]);
 			i++;
