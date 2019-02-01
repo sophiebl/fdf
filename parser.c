@@ -18,17 +18,16 @@ t_line	*ft_get_map(int fd)
 		nb_line++;
 		if (!(lst->str = ft_strsplit(line, ' ')))
 			return 0;
-	   	i = 0;
+	  i = 0;
 		while (lst->str[i])
-		{
-			lst->nb_col++;
 			i++;
-		}
+		lst->nb_col = i;
 		lst->next = malloc(sizeof(t_line));
 		lst = lst->next;
 		free (line);
 	}
 	lst->next = NULL;
+	printf("----End GNL-----\n");
 	return (begin);
 }
 
@@ -36,13 +35,14 @@ int		**ft_get_tab(t_line *lst)
 {
 	t_line 	*tmp;
 	int		nb_line;
+	int		nb_col;
 	int		i;
 	int		j;
 	int		**tab;
 
-	nb_line = -1;
+	nb_line = 0;
 	tmp = lst;
-	while (tmp)
+	while (tmp->next)
 	{
 		nb_line++;
 		tmp = tmp->next;
@@ -53,28 +53,32 @@ int		**ft_get_tab(t_line *lst)
 	j = 0;
 	while (lst->next)
 	{
-		printf("nb_col:%d\n", lst->nb_col);
+		printf("\nnb_col:%d ", lst->nb_col);
 		tab[j] = malloc(sizeof(int *) * lst->nb_col);
 		i = 0;
 		while (i < lst->nb_col)
 		{
 			tab[j][i] = ft_atoi(lst->str[i]);
+			printf("%d ", tab[j][i]);
 			i++;
 		}
 		j++;
 		lst = lst->next;
 	}
+	printf("\n----End lst to tab-----\n");
 	j = 0;
-	while (tab[j])
+	nb_col = lst->nb_col;
+	while (j < 11)
 	{
 		i  = 0;
-		while(tab[j][i])
+		while(i < 19)
 		{
-			printf("%d", tab[j][i]);
+			printf("%d ", tab[j][i]);
 			i++;
 		}
 		j++;
-		ft_putchar('\n');
+		printf("- Line %d\n", j);
 	}
+	printf("----Back to the main-----\n");
 	return (tab);
 }
