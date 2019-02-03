@@ -1,5 +1,10 @@
 #include "fdf.h"
 
+/*
+ * creation de la liste contenant les lignes lues grace a GNL
+ *
+ *
+ */
 t_line	*ft_get_map(int fd)
 {
 	int		i;
@@ -14,7 +19,7 @@ t_line	*ft_get_map(int fd)
 	nb_line = 0;
 	while (get_next_line(fd, &line))
 	{
-		ft_putendl(line);
+	//	ft_putendl(line);
 		nb_line++;
 		if (!(lst->str = ft_strsplit(line, ' ')))
 			return 0;
@@ -46,6 +51,11 @@ int		**ft_get_tab(t_line *lst)
 	while (tmp->next)
 	{
 		nb_line++;
+		if (tmp->nb_col != lst->nb_col)
+		{
+			write(2, "Error:\nThe file is invalid", 26);
+			exit(1);	
+		}
 		tmp = tmp->next;
 	}
 	printf("nb_line:%d\n", nb_line);
