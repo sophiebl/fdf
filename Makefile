@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2019/01/31 18:19:43 by sboulaao         ###   ########.fr        #
+#    Updated: 2019/02/03 16:08:40 by sboulaao         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LDFLAGS = -L /usr/local/lib/ -L ./libft
 LDLIBS = -lmlx -framework OpenGL -framework AppKit -lft
 CFLAGS = -Wall -Wextra -Werror 
 CC = gcc
-SRC = n_window.c \
+SRC = main.c \
 	parser.c \
 
 all: $(NAME)

@@ -18,10 +18,12 @@ typedef struct		s_mlx
 
 typedef struct		s_line
 {
-	char			*line;
+	char			**str;
+	int				nb_col;
 	struct s_line	*next;
 }					t_line;
 
-int		*parser(int fd);
-int		ft_nb(t_line *lst);
+t_line	*ft_get_map(int fd);
+int		**ft_get_tab(t_line *lst);
+
 #endif
