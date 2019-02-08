@@ -9,6 +9,7 @@ int		main(int argc, char **argv)
 	{
 		fd = open(argv[1], O_RDONLY);
 		tab = ft_get_tab(ft_get_map(fd));
+		n_window();
 	}
 	return 0;
 }

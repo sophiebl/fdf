@@ -14,7 +14,9 @@ typedef struct		s_mlx
 {
 	void			*ptr;
 	void			*wdw;
-	struct s_mlx	*next;
+	void			*img;
+	int				img_h;
+	int				img_w;
 }					t_mlx;
 
 typedef struct		s_line
@@ -26,5 +28,6 @@ typedef struct		s_line
 
 t_line	*ft_get_map(int fd);
 int		**ft_get_tab(t_line *lst);
+int		n_window(void);
 
 #endif
