@@ -13,12 +13,9 @@ int		ft_verif(char *file)
 int		main(int ac, char **av)
 {
 	int		fd;
-//	int		i;
-//	int		j;
 	int 	**tab;
+	t_mlx	mlx;
 
-//	i = 2;
-//	j = 0;
 	if (ac >= 2 && ac <= 4)
 	{
 		if (ft_verif(av[1]))
@@ -37,16 +34,8 @@ int		main(int ac, char **av)
 			write(2, "Error:\nfile can't be closed", 27);
 			exit(1);
 		}
-		/*
-		while (i < 20)
-		{
-			while (j < 5)
-			{
-				printf("tab  : %d, i : %d, j : %d", tab[i][j], i, j);
-				j++;
-			}
-			i++;
-		}*/
+		mlx.ptr = mlx_init();
+		get_img(mlx_ptr);
 	}
 	return 0;
 }
