@@ -19,20 +19,19 @@ t_line	*ft_get_map(int fd)
 	nb_line = 0;
 	while (get_next_line(fd, &line))
 	{
-	//	ft_putendl(line);
 		nb_line++;
 		if (!(lst->str = ft_strsplit(line, ' ')))
 			return 0;
 		i = 0;
 		while (lst->str[i])
 			i++;
-		lst->nb_col = i;
+		lst->x_tab = i;
 		lst->next = malloc(sizeof(t_line));
 		lst = lst->next;
 		free (line);
 	}
+	printf("line : lst->x_tab%d\n", lst->x_tab);
 	lst->next = NULL;
-	printf("----End GNL-----\n");
 	return (begin);
 }
 
@@ -46,52 +45,51 @@ int		**ft_get_tab(t_line *lst)
 	int		**tab;
 
 	nb_line = 0;
-	nb_col = lst->nb_col;
+	nb_col = lst->x_tab;
 	tmp = lst;
+	printf("line : lst->x_tab%d\n", lst->x_tab);
 	while (tmp->next)
 	{
 		nb_line++;
-		if (tmp->nb_col != lst->nb_col)
+		if (tmp->x_tab != lst->x_tab)
 		{
 			write(2, "Error:\nThe file is invalid", 26);
 			exit(1);	
 		}
 		tmp = tmp->next;
 	}
-	printf("nb_line:%d\n", nb_line);
+	tmp->y_tab = nb_line;
 	if (!(tab = malloc(sizeof(int **) * nb_line)))
 		return 0;
 	j = 0;
 	while (lst->next)
 	{
-		printf("\nnb_col:%d ", lst->nb_col);
-		tab[j] = malloc(sizeof(int *) * lst->nb_col);
+		tab[j] = malloc(sizeof(int *) * lst->x_tab);
 		i = 0;
-		while (i < lst->nb_col)
+		while (i < lst->x_tab)
 		{
 			tab[j][i] = ft_atoi(lst->str[i]);
-			printf("%d ", tab[j][i]);
 			i++;
 		}
 		j++;
 		lst = lst->next;
 	}
 	tab[j] = 0;
-	printf("\n----End lst to tab-----\n");
 	j = 0;
-	printf("nb_col:%d, nb_line:%d\n", nb_col, nb_line);
+	printf("line malloc: lst->x_tab%d\n", lst->x_tab);
 	while (j < nb_line)
 	{
-		printf("j:%d i:%d - ", j, i);
 		i  = 0;
 		while (i < nb_col)
 		{
-			printf("%d ", tab[j][i]);
 			i++;
 		}
 		j++;
-		printf("\n");
 	}
+	printf("line : nb_line%d\n", nb_line);
+	printf("line : lst->x_tab%d\n", lst->x_tab);
+	printf("line : nb_col%d\n", nb_col);
+	printf("line : lst->y_tab%d\n", lst->y_tab);
 	printf("----Back to the main-----\n");
 	return (tab);
 }

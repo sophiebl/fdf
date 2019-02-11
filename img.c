@@ -1,43 +1,26 @@
 #include "fdf.h"
 
-void	get_img(void *mlx_ptr)
+void	get_img(t_mlx *mlx)
 {
-	img_ptr = mlx_new_image(mlx_ptr, 800, 600);
-	img_str = mlx_get_data_addr(img_ptr, &(bpp), &(s_l), &(endian));
-	//fill_pixel(img_str, 5, 2, 65535);
-	mlx_wdw = mlx_new_window(mlx_ptr, 800, 600, "Window");
-//	mlx_put_image_to_window(mlx_ptr, mlx_wdw, img_ptr, 5, 2);
+	t_img img[1];
+
+	img->img_ptr = mlx_new_image(mlx->ptr, WIN_WIDTH, WIN_HEIGHT);
+	img->data = (int *)mlx_get_data_addr(img->img_ptr, &(img->bpp), &(img->s_l), &(img->endian));
+	mlx->img = img;
+	fill_pixel(img);
+//	mlx_wdw = mlx_new_window(mlx_ptr, 800, 600, "Window");
+	mlx_put_image_to_window(mlx->ptr, mlx->wdw, img->img_ptr, 0, 0);
 }
 
-void	fill_pixel(char *img_str, int x, int y, int color)
+void	fill_pixel(t_img *img)
 {
-	int 	*x_pos_pix = NULL;
-	int 	*y_pos_pix = NULL;
-	int		i;
+	int        i;
 
-	x_pos_pix[0] = 0;
-	x_pos_pix[1] = 0;
-	x_pos_pix[2] = 0;
-	x_pos_pix[3] = 0;
-	y_pos_pix[0] = 0;
-	y_pos_pix[1] = 0;
-	y_pos_pix[2] = 0;
-	y_pos_pix[3] = 0;
-
-	i = 0;
-	while (i < 4)
+	i = 50;
+	while (i < 100)
 	{
-		x_pos_pix[i] = (y + 4 * x) + i;
+		img->data[i] = 0xFFFFFF;
 		i++;
 	}
-	i = 0;
-	while (i < 4)
-	{
-		y_pos_pix[i] = (x + 4 * 800 * y) + i;
-		i++;
-	}
-	printf("x pos : %d", x_pos_pix[0]);
-	printf("y pos : %d", y_pos_pix[0]);
-	(void)img_str;
-	(void)color;
+
 }

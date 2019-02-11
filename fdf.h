@@ -16,26 +16,28 @@
 typedef struct		s_img
 {
 	void	*img_ptr;
+	char	*img_str;
 	int		*data;
 	int		bpp;
 	int		s_l;
 	int		endian;
 }					t_img;
 
+typedef struct		s_line
+{
+	char			**str;
+	int				x_tab;
+	int				y_tab;
+	struct s_line	*next;
+}					t_line;
+
 typedef struct		s_mlx
 {
 	void			*ptr;
 	void			*wdw;
-	t_img			img;
-	struct s_mlx	*next;
+	t_img			*img;
+	t_line			*lst;
 }					t_mlx;
-
-typedef struct		s_line
-{
-	char			**str;
-	int				nb_col;
-	struct s_line	*next;
-}					t_line;
 
 /*
  * parser.c
@@ -50,7 +52,7 @@ int		**ft_get_tab(t_line *lst);
  *
 */
 
-void	get_img(void	*mlx_ptr);
-void	fill_pixel(char *img_str, int x, int y, int color);
+void	get_img(t_mlx *mlx);
+void	fill_pixel(t_img *img);
 
 #endif
