@@ -23,29 +23,37 @@ typedef struct		s_img
 	int		endian;
 }					t_img;
 
-typedef struct		s_line
+typedef struct		s_parse
 {
-	char			**str;
+	int				**tab;
 	int				x_tab;
 	int				y_tab;
-	struct s_line	*next;
-}					t_line;
+}					t_parse;
 
 typedef struct		s_mlx
 {
 	void			*ptr;
 	void			*wdw;
 	t_img			*img;
-	t_line			*lst;
+	t_parser		*map;
 }					t_mlx;
+
+typedef struct		s_line
+{
+	char			**str;
+	int				x_str;
+	int				y_str;
+	t_line			*next;
+}					t_line;
+
 
 /*
  * parser.c
  *
 */
 
-t_line	*ft_get_map(int fd);
-int		**ft_get_tab(t_line *lst);
+t_line 	*ft_get_map(int fd);
+t_parse	*ft_get_tab(t_line *str);
 
 /*
  * img.c

@@ -5,48 +5,52 @@
  *
  *
  */
-t_line	*ft_get_map(int fd)
-{
-	int		i;
-	char 	*line;
-	t_line	*lst;
-	t_line	*begin;
-	int		nb_line;
 
-	if (!(lst = malloc(sizeof(t_line))))
-		return 0;
-	begin = lst;
-	nb_line = 0;
-	while (get_next_line(fd, &line))
-	{
-		nb_line++;
-		if (!(lst->str = ft_strsplit(line, ' ')))
-			return 0;
-		i = 0;
-		while (lst->str[i])
-			i++;
-		lst->x_tab = i;
-		lst->next = malloc(sizeof(t_line));
-		lst = lst->next;
-		free (line);
-	}
-	printf("line : lst->x_tab%d\n", lst->x_tab);
-	lst->next = NULL;
-	return (begin);
-}
+ t_line		*ft_get_map(int fd)
+ {
+ 	int			i;
+ 	char 		*line;
+ 	t_line		*lst;
+ 	t_line		*begin;
+ 	int			nb_line;
 
-int		**ft_get_tab(t_line *lst)
+ 	if (!(lst = malloc(sizeof(t_line))))
+ 		return 0;
+ 	begin = lst;
+ 	nb_line = 0;
+ 	while (get_next_line(fd, &line) == 1)
+ 	{
+ 		ft_putendl(line);
+ 		nb_line++;
+ 		if (!(lst->str = ft_strsplit(line, ' ')))
+ 			return 0;
+ 	  	i = 0;
+ 		while (lst->str[i])
+ 			i++;
+ 		lst->x_str = i;
+ 		lst->next = malloc(sizeof(t_line));
+ 		lst = lst->next;
+ 		free (line);
+ 	}
+ 	lst->next = NULL;
+	begin->y_str = nb_line;
+ 	return (begin);
+ }
+
+t_parse		*ft_get_tab(t_line *line)
 {
-	t_line 	*tmp;
-	int		nb_line;
-	int		nb_col;
-	int		i;
-	int		j;
-	int		**tab;
+	t_parse		*tab;
+	t_parse		*tmp;
+	int			nb_line;
+	int			nb_col;
+	int			i;
+	int			j;
+	char		**str;
+	int			**tab;
 
 	nb_line = 0;
 	nb_col = lst->x_tab;
-	tmp = lst;
+	tmp = line;
 	printf("line : lst->x_tab%d\n", lst->x_tab);
 	while (tmp->next)
 	{
@@ -54,7 +58,7 @@ int		**ft_get_tab(t_line *lst)
 		if (tmp->x_tab != lst->x_tab)
 		{
 			write(2, "Error:\nThe file is invalid", 26);
-			exit(1);	
+			exit(1);
 		}
 		tmp = tmp->next;
 	}
