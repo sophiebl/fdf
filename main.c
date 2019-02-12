@@ -15,7 +15,7 @@ int		main(int ac, char **av)
 	int		fd;
 	t_mlx	mlx[1];
 
-	if (ac >= 2 && ac <= 4)
+	if (ac >= 2)
 	{
 		if (ft_verif(av[1]))
 		{
@@ -38,6 +38,7 @@ int		main(int ac, char **av)
 		mlx->ptr = mlx_init();
 		mlx->wdw = mlx_new_window(mlx->ptr, WIN_WIDTH, WIN_HEIGHT, "Window");
 		get_img(mlx);
+		ft_line(mlx, ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]), ft_atoi(av[5]));
 		mlx_loop(mlx->ptr);
 	}
 	return 0;

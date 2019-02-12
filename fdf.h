@@ -10,7 +10,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define WIN_WIDTH 800
+# define WIN_WIDTH 1800
 # define WIN_HEIGHT 800
 
 typedef struct		s_img
@@ -60,6 +60,7 @@ t_parse	*ft_get_tab(t_line *str);
  *
 */
 
+int		ft_line(t_mlx *mlx,int x1, int y1, int x2, int y2);
 void	get_img(t_mlx *mlx);
 void	fill_pixel(t_img *img);
 

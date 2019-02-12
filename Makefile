@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2019/02/11 15:59:29 by sboulaao         ###   ########.fr        #
+#    Updated: 2019/02/12 19:14:43 by sboulaao         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CC = gcc
 SRC = main.c \
 	parser.c \
 	img.c \
+	draw.c \
 
 all: $(NAME)
 
