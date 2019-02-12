@@ -35,7 +35,7 @@ typedef struct		s_mlx
 	void			*ptr;
 	void			*wdw;
 	t_img			*img;
-	t_parser		*map;
+	t_parse			*map;
 }					t_mlx;
 
 typedef struct		s_line
@@ -43,7 +43,7 @@ typedef struct		s_line
 	char			**str;
 	int				x_str;
 	int				y_str;
-	t_line			*next;
+	struct s_line	*next;
 }					t_line;
 
 

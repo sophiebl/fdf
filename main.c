@@ -13,7 +13,6 @@ int		ft_verif(char *file)
 int		main(int ac, char **av)
 {
 	int		fd;
-	int 	**tab;
 	t_mlx	mlx[1];
 
 	if (ac >= 2 && ac <= 4)
@@ -28,14 +27,14 @@ int		main(int ac, char **av)
 			write(2, "Error:\nfile doesn't exist", 25);
 			exit(1);
 		}
-		tab = ft_get_tab(ft_get_map(fd));
+		mlx->map = ft_get_tab(ft_get_map(fd));
 		if (close(fd) == -1)
 		{
 			write(2, "Error:\nfile can't be closed", 27);
 			exit(1);
 		}
-		printf("%d\n", mlx->lst->x_tab);
-		printf("%d\n", mlx->lst->y_tab);
+		printf("%d\n", mlx->map->x_tab);
+		printf("%d\n", mlx->map->y_tab);
 		mlx->ptr = mlx_init();
 		mlx->wdw = mlx_new_window(mlx->ptr, WIN_WIDTH, WIN_HEIGHT, "Window");
 		get_img(mlx);
