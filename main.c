@@ -33,12 +33,11 @@ int		main(int ac, char **av)
 			write(2, "Error:\nfile can't be closed", 27);
 			exit(1);
 		}
-		printf("%d\n", mlx->map->x_tab);
-		printf("%d\n", mlx->map->y_tab);
+		printf("x/col:%d\n", mlx->map->x_tab);
+		printf("y/line:%d\n", mlx->map->y_tab);
 		mlx->ptr = mlx_init();
-		mlx->wdw = mlx_new_window(mlx->ptr, WIN_WIDTH, WIN_HEIGHT, "Window");
-		get_img(mlx);
-		ft_line(mlx, ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]), ft_atoi(av[5]));
+		mlx->wdw = mlx_new_window(mlx->ptr, WIN_WIDTH, WIN_HEIGHT, "Hello fdf!");
+		ft_draw_map(mlx, ft_atoi(av[2]));
 		mlx_loop(mlx->ptr);
 	}
 	return 0;

@@ -60,7 +60,8 @@ t_parse	*ft_get_tab(t_line *str);
  *
 */
 
-int		ft_line(t_mlx *mlx,int x1, int y1, int x2, int y2);
+int	ft_draw_map(t_mlx *mlx, int gap);
+int	ft_line(t_mlx *mlx,int x1, int y1, int x2, int y2);
 void	get_img(t_mlx *mlx);
 void	fill_pixel(t_img *img);
 

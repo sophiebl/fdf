@@ -73,8 +73,6 @@ t_parse		*ft_get_tab(t_line *line)
 		line = line->next;
 	}
 	map->tab[j] = 0;
-	printf("map nb_col:%d\n", map->x_tab);
-	printf("map nb_line:%d\n", map->y_tab);
 	printf("----Back to the main-----\n");
 	return (map);
 }
