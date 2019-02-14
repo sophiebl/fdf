@@ -10,7 +10,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define WIN_WIDTH 1800
+# define WIN_WIDTH 1000
 # define WIN_HEIGHT 800
 
 typedef struct		s_img
