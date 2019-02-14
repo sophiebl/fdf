@@ -1,6 +1,9 @@
 
 #include "fdf.h"
 
+/* Fonction de projection parallele, on calcule les nouveaux x et y
+ * en fonction de l'alt z, la proj utilise une constante a */
+
 void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 {
 		int x1_new;
@@ -16,6 +19,9 @@ void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 		y2_new = y2 + (a / 2) * z2;
 		ft_line(mlx, x1_new, y1_new, x2_new, y2_new);
 }
+
+/*Parcoure la map, envoie les points a la fonct de proj, et ajoute le gap 
+ * Il manque le tracage des bordures ext droite et bas ;) */
 
 int		ft_draw_map(t_mlx *mlx, int gap)
 {
@@ -47,6 +53,8 @@ void	ft_swap_int(int *nb1, int *nb2)
 	*nb2 = *nb1;
 	*nb1 = tmp;
 }
+
+/* modification du else if pour prendre en compte le cas ou y varie et pas y */
 
 int	ft_line(t_mlx *mlx, int x1, int y1, int x2, int y2)
 {
