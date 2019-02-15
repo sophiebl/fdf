@@ -10,11 +10,13 @@ void	ft_proj_iso(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	int a;
 	int b;
 	int color;
+	int offset;
 
+	offset = 600;
 	a = 500;
 	b = 1000;
-	x1_new = (a * x1 - b * y1) / 1000;
-	x2_new = (a * x2 - b * y2) / 1000;
+	x1_new = offset + (a * x1 - b * y1) / 1000;
+	x2_new = offset + (a * x2 - b * y2) / 1000;
 	y1_new = z1 + ((a / 2) * x1 + (b / 2) * y1) / 1000;
 	y2_new = z2 + ((a / 2) * x2 + (b / 2) * y2) / 1000;
 	color = 65535;
@@ -36,12 +38,14 @@ void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	int y2_new;
 	int a;
 	int color;
+	int offset;
 
-	a = 1850;
-	x1_new = x1 + (a * z1) / 1000;
-	x2_new = x2 + (a * z2) / 1000;
-	y1_new = y1 + (a * z1) / 2000;
-	y2_new = y2 + (a * z2) / 2000;
+	a = -850;
+	offset = 50;
+	x1_new = offset + x1 + (a * z1) / 1000;
+	x2_new = offset + x2 + (a * z2) / 1000;
+	y1_new = offset + y1 + (a * z1) / 2000;
+	y2_new = offset +  y2 + (a * z2) / 2000;
 	color = 65535;
 	if (z1 > 0 || z2 > 0)
 		color = 16711680;
@@ -99,8 +103,6 @@ int	ft_line(t_mlx *mlx, int x1, int y1, int x2, int y2, int color)
 	int x;
 	int y;
 
-	if (x1 != x2 && y1 != y2)
-		color = 16765404;
 	if (x1 > x2)
 	{
 		ft_swap_int(&x1, &x2);
