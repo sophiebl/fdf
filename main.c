@@ -1,5 +1,16 @@
 #include "fdf.h"
 
+int		deal_key(int key, t_mlx *mlx)
+{
+	if (key == 53)
+	{
+		mlx_clear_window(mlx->ptr, mlx->wdw);
+		exit(0);
+	}
+	return (0);
+}
+
+
 int		ft_verif(char *file)
 {
 	int i;
@@ -38,6 +49,7 @@ int		main(int ac, char **av)
 		mlx->ptr = mlx_init();
 		mlx->wdw = mlx_new_window(mlx->ptr, WIN_WIDTH, WIN_HEIGHT, "Hello fdf!");
 		ft_draw_map(mlx, av[2][1]);
+		mlx_key_hook(mlx->wdw, deal_key, mlx);
 		mlx_loop(mlx->ptr);
 	}
 	else
