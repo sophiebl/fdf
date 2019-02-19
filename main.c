@@ -44,8 +44,7 @@ int		main(int ac, char **av)
 			write(2, "Error:\nfile can't be closed", 27);
 			exit(1);
 		}
-		printf("x/col:%d\n", mlx->map->x_tab);
-		printf("y/line:%d\n", mlx->map->y_tab);
+		printf("x/col:%d - y/line: %d\nPress ESC to quit fdf./n ", mlx->map->x_tab, mlx->map->y_tab);
 		mlx->ptr = mlx_init();
 		mlx->wdw = mlx_new_window(mlx->ptr, WIN_WIDTH, WIN_HEIGHT, "Hello fdf!");
 		ft_draw_map(mlx, av[2][1]);
