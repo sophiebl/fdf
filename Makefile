@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2019/02/12 19:14:43 by sboulaao         ###   ########.fr        #
+#    Updated: 2019/02/19 17:16:25 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 SRC_PATH = ./
 OBJ_PATH = ./
 INC = -I /usr/local/include
-LDFLAGS = -L /usr/local/lib/ -L ./libft
+LDFLAGS = -L ./minilibx -L ./libft
 LDLIBS = -lmlx -framework OpenGL -framework AppKit -lft
 CFLAGS = -Wall -Wextra -Werror 
 CC = gcc
@@ -30,10 +30,11 @@ OBJ = $(SRC:.c=.o)
 $(NAME): $(OBJ)
 	@echo "\033[32m>>\033[0m \033[33mStarting library & $(NAME)\033[32m compilation\033[0m \033[0m"
 	@make -C libft
+	@make -C minilibx
 	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 	@echo "\033[32m>> $(NAME) correctly created ... OK\033[0m"
 
-%.o: %.c
+%.o: %.c fdf.h
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:

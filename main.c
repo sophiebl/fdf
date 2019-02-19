@@ -15,11 +15,11 @@ int		main(int ac, char **av)
 	int		fd;
 	t_mlx	mlx[1];
 
-	if (ac >= 3)
+	if (ac == 3)
 	{
 		if (ft_verif(av[1]))
 		{
-			write(2, "Error:\nUsage: ./fdf <file.fdf>", 29);
+			write(2, "Error:\nUsage: ./fdf <file.fdf> -p/-i\n", 35);
 			exit(1);
 		}
 		if ((fd = open(av[1], O_RDONLY)) == -1)
@@ -37,10 +37,10 @@ int		main(int ac, char **av)
 		printf("y/line:%d\n", mlx->map->y_tab);
 		mlx->ptr = mlx_init();
 		mlx->wdw = mlx_new_window(mlx->ptr, WIN_WIDTH, WIN_HEIGHT, "Hello fdf!");
-		ft_draw_map(mlx, ft_atoi(av[2]), av[3][0]);
+		ft_draw_map(mlx, av[2][1]);
 		mlx_loop(mlx->ptr);
 	}
 	else
-		write(1, "Usage: ./fdf [maps file] [gap] [p or i]\n", 40);
+		write(2, "Usage: ./fdf <file.fdf> -p/-i\n", 30);
 	return 0;
 }
