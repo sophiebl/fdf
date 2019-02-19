@@ -19,7 +19,7 @@ void	ft_proj_iso(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	p->y2 = -z2 + ((a / 2) * x2 + (b / 2) * y2) / 1000;
 	color = 65535;
 	if (z1 > 0 || z2 > 0)
-		color = 16711680;
+		color = 16761035;
 	ft_line(mlx, p, color);
 
 }
@@ -40,7 +40,7 @@ void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	p->y2 = offset +  y2 + (a * z2) / 2000;
 	color = 65535;
 	if (z1 > 0 || z2 > 0)
-		color = 16711680;
+		color = 16761035;
 	ft_line(mlx, p, color);
 }
 
