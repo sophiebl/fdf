@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 SRC = main.c \
 	parser.c \
-	img.c \
+	color.c \
 	draw.c \
 
 all: $(NAME)

@@ -62,8 +62,9 @@ t_parse				*ft_get_tab(t_line *str);
 void				ft_draw_map(t_mlx *mlx, char c);
 void				ft_line(t_mlx *mlx, t_coord *p, int color);
 
-void	get_img(t_mlx *mlx);
-void	fill_pixel(t_img *img);
-
+void				get_img(t_mlx *mlx, t_coord *p, int color);
+void				fill_pixel(t_img *img, int x, int y, int color);
+unsigned int			to_rgb(unsigned int a, unsigned int r,
+					unsigned int g, unsigned int b);
 
 #endif
