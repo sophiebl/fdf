@@ -55,6 +55,7 @@ typedef struct		s_mlx
 	t_img			*img;
 	t_parse			*map;
 	t_color			*color;
+	int				tab_iso[1000][1000];
 }					t_mlx;
 
 typedef struct		s_coord
@@ -67,6 +68,12 @@ typedef struct		s_coord
 	int				z2;
 }					t_coord;
 
+typedef struct		s_pixeliso
+{
+	int				x;
+	int				y;
+}					t_pixeliso;
+
 t_line 				*ft_get_map(int fd);
 t_parse				*ft_get_tab(t_line *str);
 
@@ -74,13 +81,15 @@ void				ft_proj_iso(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2);
 void				ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2);
 
 void				ft_draw_map(t_mlx *mlx, char c);
-void				ft_line(t_mlx *mlx, t_coord *p, int color);
+//void				ft_line(t_mlx *mlx, t_coord *p, int color);
+int					**ft_pixels_to_color(t_mlx *mlx, t_coord *p, int color);
 
 //void				get_img(t_mlx *mlx, t_coord *p, int color);
-void				get_img(t_mlx *mlx, t_coord *p, t_color *color);
+void				get_img(t_mlx *mlx, t_color *color);
 //void				fill_pixel(t_img *img, int x, int y, int color);
 //void				fill_pixel(t_img *img, int color);
 unsigned int			to_rgb(unsigned int a, unsigned int r,
 					unsigned int g, unsigned int b);
+void				ft_swap_xy(int *x1, int *x2, int *y1, int *y2);
 
 #endif

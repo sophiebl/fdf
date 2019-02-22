@@ -3,10 +3,10 @@
 void	ft_proj_iso(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 {
 	t_coord *p;
-	t_color color[1];
-	int a;
-	int b;
-	int offset;
+	t_color	color[1];
+	int		a;
+	int 	b;
+	int 	offset;
 
 	p = malloc(sizeof(t_coord));
 	offset = 600;
@@ -20,16 +20,16 @@ void	ft_proj_iso(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	color->int_color = 65535;
 	if (z1 > 0 || z2 > 0)
 		color->int_color = 16761035;
-	//ft_line(mlx, p, color->int_color);
-	get_img(mlx, p, color);
+	ft_pixels_to_color(mlx, p, color->int_color);
+	get_img(mlx, color);
 }
 
 void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 {
 	t_coord *p;
 	t_color color[1];
-	int a;
-	int offset;
+	int		a;
+	int		offset;
 
 	p = malloc(sizeof(t_coord));
 	a = -850;
@@ -43,5 +43,5 @@ void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	if (z1 > 0 || z2 > 0)
 		color->int_color = 16761035;
 	//ft_line(mlx, p, color->int_color);
-	get_img(mlx, p, color);
+	get_img(mlx, color);
 }

@@ -33,12 +33,15 @@ void		ft_draw_map(t_mlx *mlx, char c)
 		y++;
 	}
 }
-/*
-void	ft_line(t_mlx *mlx, t_coord *p, int color)
+
+int 	**ft_pixels_to_color(t_mlx *mlx, t_coord *p, int color)
 {
 	int x;
 	int y;
+	int i;
+	int j;
 
+	j = 0;
 	if (p->x1 > p->x2)
 		ft_swap_xy(&(p->x1), &(p->x2), &(p->y1), &(p->y2));
 	if ((p->x2 - p->x1) > (p->y2 - p->y1))
@@ -46,7 +49,14 @@ void	ft_line(t_mlx *mlx, t_coord *p, int color)
 		x = p->x1;
 		while (x <= p->x2)
 		{
-			mlx_pixel_put(mlx->ptr, mlx->wdw, x, p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1), color);
+			while (j <= mlx->map->y_tab)
+			{
+				mlx->*tab_iso[j] =  p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1); 
+				i = 0;
+				while (i++ <= mlx->x_tab)
+					mlx->tab_iso[j][i] = x;
+				j++;
+			}
 			x++;
 		}
 	}
@@ -55,8 +65,17 @@ void	ft_line(t_mlx *mlx, t_coord *p, int color)
 		y = p->y1;
 		while (y <= p->y2)
 		{
-			mlx_pixel_put(mlx->ptr, mlx->wdw, p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1), y, color);
+		//	mlx_pixel_put(mlx->ptr, mlx->wdw, p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1), y, color);
+			while (j <= mlx->map->y_tab)
+			{
+				mlx->tab_iso[j] = y; 
+				i = 0;
+				while (i++ <= mlx->x_tab)
+					mlx->tab_iso[j][i] = p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1);
+				j++;
+			}
 			y++;
 		}
 	}
-}*/
+	return (tab_iso);
+}
