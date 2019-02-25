@@ -1,4 +1,3 @@
-
 #include "fdf.h"
 
 void	ft_proj_iso(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
@@ -7,16 +6,18 @@ void	ft_proj_iso(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	int a;
 	int b;
 	int color;
-	int offset;
+	int offset_x;
+	int	offset_y;
 
 	p = malloc(sizeof(t_coord));
-	offset = 600;
 	a = 500;
-	b = 1000;
-	p->x1 = offset + (a * x1 - b * y1) / 1000;
-	p->x2 = offset + (a * x2 - b * y2) / 1000;
-	p->y1 = -z1 + ((a / 2) * x1 + (b / 2) * y1) / 1000;
-	p->y2 = -z2 + ((a / 2) * x2 + (b / 2) * y2) / 1000;
+	b = 500;
+	offset_x = (WIN_WIDTH * 2) / 5;
+	offset_y = WIN_HEIGHT / 5;
+	p->x1 = offset_x + (a * x1 - b * y1) / 1000;
+	p->x2 = offset_x + (a * x2 - b * y2) / 1000;
+	p->y1 = offset_y -z1 + ((a / 2) * x1 + (b / 2) * y1) / 1000;
+	p->y2 = offset_y -z2 + ((a / 2) * x2 + (b / 2) * y2) / 1000;
 	color = 65535;
 	if (z1 > 0 || z2 > 0)
 		color = 16761035;
@@ -29,15 +30,17 @@ void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	t_coord *p;
 	int a;
 	int color;
-	int offset;
+	int	offset_x;
+	int	offset_y;
 
 	p = malloc(sizeof(t_coord));
 	a = 500;
-	offset = 50;
-	p->x1 = offset + x1 + (a * z1) / 1000;
-	p->x2 = offset + x2 + (a * z2) / 1000;
-	p->y1 = offset + y1 + (a * z1) / 2000;
-	p->y2 = offset +  y2 + (a * z2) / 2000;
+	offset_x = WIN_WIDTH / (mlx->map->x_tab + 1);
+	offset_y = WIN_HEIGHT / (mlx->map->y_tab + 1);
+	p->x1 = offset_x + x1 + (a * z1) / 1000;
+	p->x2 = offset_x + x2 + (a * z2) / 1000;
+	p->y1 = offset_y + y1 + (a * z1) / 2000;
+	p->y2 = offset_y +  y2 + (a * z2) / 2000;
 	color = 65535;
 	if (z1 > 0 || z2 > 0)
 		color = 16761035;
@@ -54,24 +57,28 @@ void		ft_draw_map(t_mlx *mlx, char c)
 	int			gap_z;
 
 	tab = mlx->map->tab;
-	gap_x = (WIN_WIDTH - 25) / mlx->map->x_tab;
-	gap_y = (WIN_HEIGHT - 25) / mlx->map->y_tab;
-	gap_z = (gap_x + gap_y) / 8;
+	gap_x = WIN_WIDTH / (mlx->map->x_tab + 1);
+	gap_y = WIN_HEIGHT / (mlx->map->y_tab + 1);
+	gap_z = (gap_x + gap_y) / 10;
 	y = 0;
-	while (y < (mlx->map->y_tab - 1))
+	while (y < mlx->map->y_tab)
 	{
 		x = 0;
-		while (x < (mlx->map->x_tab - 1))
+		while (x < mlx->map->x_tab)
 		{
 			if (c == 'i')
 			{
-				ft_proj_iso(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, (x + 1) * gap_x, y * gap_y, tab[y][x + 1] * gap_z);
-				ft_proj_iso(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, x * gap_x, (y + 1) * gap_y, tab[y + 1][x] * gap_z);
+				if (x < (mlx->map->x_tab - 1))
+					ft_proj_iso(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, (x + 1) * gap_x, y * gap_y, tab[y][x + 1] * gap_z);
+				if (y < (mlx->map->y_tab - 1))
+					ft_proj_iso(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, x * gap_x, (y + 1) * gap_y, tab[y + 1][x] * gap_z);
 			}
 			if (c == 'p')
 			{
-				ft_proj_p(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, (x + 1) * gap_x, y * gap_y, tab[y][x + 1] * gap_z);
-				ft_proj_p(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, x * gap_x, (y + 1) * gap_y, tab[y + 1][x] * gap_z);
+				if (x < (mlx->map->x_tab - 1))
+					ft_proj_p(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, (x + 1) * gap_x, y * gap_y, tab[y][x + 1] * gap_z);
+				if (y < (mlx->map->y_tab - 1))
+					ft_proj_p(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, x * gap_x, (y + 1) * gap_y, tab[y + 1][x] * gap_z);
 			}
 			x++;
 		}

@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2019/02/19 17:16:25 by vimucchi         ###   ########.fr        #
+#    Updated: 2019/02/25 20:10:38 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 SRC = main.c \
 	parser.c \
-	img.c \
 	draw.c \
 
 all: $(NAME)
