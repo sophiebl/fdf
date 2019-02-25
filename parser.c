@@ -1,11 +1,5 @@
 #include "fdf.h"
 
-/*
- * creation de la liste contenant les lignes lues grace a GNL
- *
- *
- */
-
  t_line		*ft_get_map(int fd)
  {
  	int			i;
@@ -58,7 +52,7 @@ t_parse		*ft_get_tab(t_line *line)
 		tmp = tmp->next;
 	}
 	if (!(map->tab = malloc(sizeof(int **) * map->y_tab)))
-		return 0;
+		return (0);
 	j = 0;
 	while (line->next)
 	{

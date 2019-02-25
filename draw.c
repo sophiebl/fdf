@@ -32,7 +32,7 @@ void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
 	int offset;
 
 	p = malloc(sizeof(t_coord));
-	a = -500;
+	a = 500;
 	offset = 50;
 	p->x1 = offset + x1 + (a * z1) / 1000;
 	p->x2 = offset + x2 + (a * z2) / 1000;
