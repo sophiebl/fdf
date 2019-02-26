@@ -15,7 +15,7 @@
 
 typedef struct		s_line
 {
-	char			**str;
+	char				**str;
 	int				x_str;
 	int				y_str;
 	struct s_line	*next;
@@ -27,7 +27,15 @@ typedef struct		s_parse
 	int				x_tab;
 	int				y_tab;
 }					t_parse;
-
+/*
+typedef struct		s_space
+{
+	int				x;
+	int				y;
+	int				z;
+	float				incr;
+}					t_space;
+*/
 typedef struct		s_zoom
 {
 	int				gap_x;
@@ -37,7 +45,7 @@ typedef struct		s_zoom
 
 typedef struct		s_img
 {
-	void			*img_ptr;
+	void				*img_ptr;
 	int				*data;
 	int				bpp;
 	int				s_l;
@@ -46,11 +54,11 @@ typedef struct		s_img
 
 typedef struct		s_mlx
 {
-	void			*ptr;
-	void			*wdw;
-	t_img			*img;
-	t_parse			map;
-	t_zoom			zoom;
+	void				*ptr;
+	void				*wdw;
+	t_img				*img;
+	t_parse				map;
+	t_zoom				zoom;
 }					t_mlx;
 
 typedef struct		s_coord

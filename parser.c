@@ -36,6 +36,7 @@ t_line		*ft_get_map(int fd)
 		free(line);
 	}
 	lst->next = NULL;
+	free(lst);
 	return (begin);
 }
 

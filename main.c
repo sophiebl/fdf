@@ -15,7 +15,18 @@
 void		ft_exit(void)
 {
 }
+/*
+t_space		ft_new_space(int x, int y, int z, float incr)
+{
+	t_space new;
 
+	new.x = x;
+	new.y = y;
+	new.z = z;
+	new.incr = incr;
+	return (new);
+}
+*/
 int			deal_key(int key, t_mlx *mlx)
 {
 	if (key == 53)
@@ -26,16 +37,14 @@ int			deal_key(int key, t_mlx *mlx)
 	return (0);
 }
 /*
-int			zoom_key(int key, t_mlx *mlx)
+static int	zoom_key(int key, t_mlx *mlx)
 {
-
-	//else if (key == 24 || key == 69)
-	//			mlx->zoom += 0.5;
-	//	else if ((key == 27 || key == 78) && mlx->zoom > 2)
-	//				mlx->zoom -= 0.5;
-
+	static int	cmp = 0;
+	t_space		add;
 	if (key == 38 || key == 69 || key == 24)
 	{
+		cmp++;
+		add = ft_new_space(0, 0, 0, 2.0);
 		printf("%d", mlx->zoom.gap_x);
 		mlx->zoom.gap_x *= 2;
 		printf("%d", mlx->zoom.gap_x);
@@ -45,6 +54,8 @@ int			zoom_key(int key, t_mlx *mlx)
 	}
 	if (key == 40 || key == 27 || key == 78)
 	{
+		cmp++;
+		add = ft_new_space(0, 0, 0, -2.0);
 		mlx->zoom.gap_x /= 2;
 		mlx->zoom.gap_y /= 2;
 		mlx->zoom.gap_z /= 2;
