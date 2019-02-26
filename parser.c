@@ -6,11 +6,14 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 20:00:47 by vimucchi          #+#    #+#             */
-/*   Updated: 2019/02/25 20:17:05 by vimucchi         ###   ########.fr       */
+/*   Updated: 2019/02/26 13:47:29 by vimucchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+
+
 
 t_line		*ft_get_map(int fd)
 {
@@ -61,17 +64,15 @@ int			ft_check_map(t_line *line)
 	return (nb_line);
 }
 
-t_parse		*ft_get_tab(t_line *line)
+int		ft_get_tab(t_line *line, t_parse *map)
 {
-	t_parse	*map;
 	int		i;
 	int		j;
 
-	map = malloc(sizeof(t_parse));
 	map->y_tab = ft_check_map(line);
 	map->x_tab = line->x_str;
 	if (!(map->tab = malloc(sizeof(int **) * map->y_tab)))
-		return (0);
+		return (1);
 	j = 0;
 	while (line->next)
 	{
@@ -85,6 +86,5 @@ t_parse		*ft_get_tab(t_line *line)
 		j++;
 		line = line->next;
 	}
-	map->tab[j] = 0;
-	return (map);
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2019/02/25 20:10:38 by vimucchi         ###   ########.fr        #
+#    Updated: 2019/02/26 12:56:11 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJ_PATH = ./
 INC = -I /usr/local/include
 LDFLAGS = -L ./minilibx -L ./libft
 LDLIBS = -lmlx -framework OpenGL -framework AppKit -lft
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -g3 -Wall -Wextra -Werror 
 CC = gcc
 SRC = main.c \
 	parser.c \
