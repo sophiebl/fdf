@@ -52,14 +52,19 @@ void		ft_draw_map(t_mlx *mlx, char c)
 	int 		x;
 	int 		y;
 	int			**tab;
+	t_zoom		zoom;
 	int			gap_x;
 	int			gap_y;
 	int			gap_z;
 
 	tab = mlx->map.tab;
+	zoom = mlx->zoom;
 	gap_x = WIN_WIDTH / (mlx->map.x_tab + 1);
+	mlx->zoom.gap_x = gap_x;
 	gap_y = WIN_HEIGHT / (mlx->map.y_tab + 1);
+	mlx->zoom.gap_y = gap_y;
 	gap_z = (gap_x + gap_y) / 10;
+	mlx->zoom.gap_z = gap_z;
 	y = 0;
 	while (y < mlx->map.y_tab)
 	{

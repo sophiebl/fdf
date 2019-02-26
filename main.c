@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 19:55:09 by vimucchi          #+#    #+#             */
-/*   Updated: 2019/02/26 13:37:39 by vimucchi         ###   ########.fr       */
+/*   Updated: 2019/02/26 19:02:06 by sboulaao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,34 @@ int			deal_key(int key, t_mlx *mlx)
 	}
 	return (0);
 }
+/*
+int			zoom_key(int key, t_mlx *mlx)
+{
 
+	//else if (key == 24 || key == 69)
+	//			mlx->zoom += 0.5;
+	//	else if ((key == 27 || key == 78) && mlx->zoom > 2)
+	//				mlx->zoom -= 0.5;
+
+	if (key == 38 || key == 69 || key == 24)
+	{
+		printf("%d", mlx->zoom.gap_x);
+		mlx->zoom.gap_x *= 2;
+		printf("%d", mlx->zoom.gap_x);
+		mlx->zoom.gap_y *= 2;
+		mlx->zoom.gap_z *= 2;
+		ft_draw_map(mlx, 'c');
+	}
+	if (key == 40 || key == 27 || key == 78)
+	{
+		mlx->zoom.gap_x /= 2;
+		mlx->zoom.gap_y /= 2;
+		mlx->zoom.gap_z /= 2;
+		ft_draw_map(mlx, 'c');
+	}
+	return (0);
+}
+*/
 int			ft_verif(char *file)
 {
 	int		i;
@@ -61,9 +88,10 @@ int			main(int ac, char **av)
 		}
 		mlx.ptr = mlx_init();
 		mlx.wdw = mlx_new_window(mlx.ptr, WIN_WIDTH, WIN_HEIGHT,
-"Hello fdf!");
+				"Hello fdf!");
 		ft_draw_map(&mlx, av[2][1]);
 		mlx_key_hook(mlx.wdw, deal_key, &mlx);
+//		mlx_key_hook(mlx.wdw, zoom_key, &mlx);
 		mlx_loop(mlx.ptr);
 	}
 	else
