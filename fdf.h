@@ -31,7 +31,6 @@ typedef struct		s_parse
 typedef struct		s_img
 {
 	void			*img_ptr;
-	char			*img_str;
 	int				*data;
 	int				bpp;
 	int				s_l;
