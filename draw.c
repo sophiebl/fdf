@@ -110,7 +110,8 @@ void	ft_line(t_mlx *mlx, t_coord *p, int color)
 		x = p->x1;
 		while (x <= p->x2)
 		{
-			mlx_pixel_put(mlx->ptr, mlx->wdw, x, p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1), color);
+		//	mlx_pixel_put(mlx->ptr, mlx->wdw, x, p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1), color);
+			mlx->img->data[WIN_WIDTH * (p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1)) + x] = color;
 			x++;
 		}
 	}
@@ -119,7 +120,8 @@ void	ft_line(t_mlx *mlx, t_coord *p, int color)
 		y = p->y1;
 		while (y <= p->y2)
 		{
-			mlx_pixel_put(mlx->ptr, mlx->wdw, p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1), y, color);
+		//	mlx_pixel_put(mlx->ptr, mlx->wdw, p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1), y, color);
+			mlx->img->data[WIN_WIDTH * y + (p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1))] = color;
 			y++;
 		}
 	}

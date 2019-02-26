@@ -6,7 +6,7 @@
 /*   By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 19:55:09 by vimucchi          #+#    #+#             */
-/*   Updated: 2019/02/25 19:58:40 by vimucchi         ###   ########.fr       */
+/*   Updated: 2019/02/26 14:01:23 by sboulaao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int			main(int ac, char **av)
 {
 	int		fd;
 	t_mlx	mlx[1];
+	t_img	img[1];
 
 	if (ac == 3)
 	{
@@ -62,7 +63,11 @@ int			main(int ac, char **av)
 		mlx->ptr = mlx_init();
 		mlx->wdw = mlx_new_window(mlx->ptr, WIN_WIDTH, WIN_HEIGHT,
 "Hello fdf!");
+		img->img_ptr = mlx_new_image(mlx->ptr, WIN_WIDTH, WIN_HEIGHT);
+		img->data = (int *)mlx_get_data_addr(img->img_ptr, &(img->bpp), &(img->s_l), &(img->endian));
+		mlx->img = img;
 		ft_draw_map(mlx, av[2][1]);
+		mlx_put_image_to_window(mlx->ptr, mlx->wdw, img->img_ptr, 0, 0);
 		mlx_key_hook(mlx->wdw, deal_key, mlx);
 		mlx_loop(mlx->ptr);
 	}
