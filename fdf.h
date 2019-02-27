@@ -28,10 +28,16 @@ typedef struct		s_parse
 	int				y_tab;
 }					t_parse;
 
+typedef struct		s_zoom
+{
+	int				gap_x;
+	int				gap_y;
+	int				gap_z;
+}					t_zoom;
+
 typedef struct		s_img
 {
 	void			*img_ptr;
-	char			*img_str;
 	int				*data;
 	int				bpp;
 	int				s_l;
@@ -42,8 +48,10 @@ typedef struct		s_mlx
 {
 	void			*ptr;
 	void			*wdw;
+	int				check;
 	t_img			*img;
 	t_parse			*map;
+	t_zoom			*zoom;
 }					t_mlx;
 
 typedef struct		s_coord

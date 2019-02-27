@@ -57,9 +57,18 @@ void		ft_draw_map(t_mlx *mlx, char c)
 	int			gap_z;
 
 	tab = mlx->map->tab;
-	gap_x = WIN_WIDTH / (mlx->map->x_tab + 1);
-	gap_y = WIN_HEIGHT / (mlx->map->y_tab + 1);
-	gap_z = (gap_x + gap_y) / 10;
+	if (mlx->check == 0)
+	{
+		gap_x = WIN_WIDTH / (mlx->map->x_tab + 1);
+		mlx->zoom->gap_x = gap_x;
+		gap_y = WIN_HEIGHT / (mlx->map->y_tab + 1);
+		mlx->zoom->gap_y = gap_y;
+		gap_z = (gap_x + gap_y) / 10;
+		mlx->zoom->gap_z = gap_z;
+	}
+	gap_x = mlx->zoom->gap_x;
+	gap_y = mlx->zoom->gap_y;
+	gap_z = mlx->zoom->gap_z;
 	y = 0;
 	while (y < mlx->map->y_tab)
 	{
@@ -110,7 +119,7 @@ void	ft_line(t_mlx *mlx, t_coord *p, int color)
 		x = p->x1;
 		while (x <= p->x2)
 		{
-		//	mlx_pixel_put(mlx->ptr, mlx->wdw, x, p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1), color);
+			//	mlx_pixel_put(mlx->ptr, mlx->wdw, x, p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1), color);
 			mlx->img->data[WIN_WIDTH * (p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1)) + x] = color;
 			x++;
 		}
@@ -120,7 +129,7 @@ void	ft_line(t_mlx *mlx, t_coord *p, int color)
 		y = p->y1;
 		while (y <= p->y2)
 		{
-		//	mlx_pixel_put(mlx->ptr, mlx->wdw, p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1), y, color);
+			//	mlx_pixel_put(mlx->ptr, mlx->wdw, p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1), y, color);
 			mlx->img->data[WIN_WIDTH * y + (p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1))] = color;
 			y++;
 		}
