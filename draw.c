@@ -1,131 +1,132 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboulaao <sboulaao@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/07 18:56:02 by sboulaao          #+#    #+#             */
+/*   Updated: 2019/03/09 16:58:48 by vimucchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void	ft_proj_iso(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
+void		ft_line_x(t_mlx *mlx, int color)
 {
-	t_coord *p;
-	int a;
-	int b;
-	int color;
-	int offset_x;
-	int	offset_y;
+	int		x;
+	int		pxl;
 
-	p = malloc(sizeof(t_coord));
-	a = 500;
-	b = 500;
-	offset_x = (WIN_WIDTH * 2) / 5;
-	offset_y = WIN_HEIGHT / 5;
-	p->x1 = offset_x + (a * x1 - b * y1) / 1000;
-	p->x2 = offset_x + (a * x2 - b * y2) / 1000;
-	p->y1 = offset_y -z1 + ((a / 2) * x1 + (b / 2) * y1) / 1000;
-	p->y2 = offset_y -z2 + ((a / 2) * x2 + (b / 2) * y2) / 1000;
-	color = 65535;
-	if (z1 > 0 || z2 > 0)
-		color = 16761035;
-	ft_line(mlx, p, color);
-
+	if (mlx->p.x2 < mlx->p.x1)
+		ft_swap_xy(&(mlx->p.x1), &(mlx->p.y1), &(mlx->p.x2), &(mlx->p.y2));
+	x = (mlx->p.x1 < 0) ? 0 : mlx->p.x1;
+	while (x <= mlx->p.x2 && x < WIN_WIDTH)
+	{
+		pxl = -1;
+		if (ft_inscreen(mlx, 'x', x))
+			pxl = WIN_WIDTH * (mlx->p.y1 + ((mlx->p.y2 - mlx->p.y1)
+						* (x - mlx->p.x1)) / (mlx->p.x2 - mlx->p.x1)) + x;
+		if (pxl >= 0 && pxl < (WIN_WIDTH * WIN_HEIGHT))
+			mlx->img.data[pxl] = color;
+		x++;
+	}
 }
 
-void  ft_proj_p(t_mlx *mlx, int x1, int y1, int z1, int x2, int y2, int z2)
+void		ft_line_y(t_mlx *mlx, int color)
 {
-	t_coord *p;
-	int a;
-	int color;
-	int	offset_x;
-	int	offset_y;
+	int		y;
+	int		pxl;
 
-	p = malloc(sizeof(t_coord));
-	a = 500;
-	offset_x = WIN_WIDTH / (mlx->map.x_tab + 1);
-	offset_y = WIN_HEIGHT / (mlx->map.y_tab + 1);
-	p->x1 = offset_x + x1 + (a * z1) / 1000;
-	p->x2 = offset_x + x2 + (a * z2) / 1000;
-	p->y1 = offset_y + y1 + (a * z1) / 2000;
-	p->y2 = offset_y +  y2 + (a * z2) / 2000;
-	color = 65535;
-	if (z1 > 0 || z2 > 0)
-		color = 16761035;
-	ft_line(mlx, p, color);
+	if (mlx->p.y2 < mlx->p.y1)
+		ft_swap_xy(&(mlx->p.x1), &(mlx->p.y1), &(mlx->p.x2), &(mlx->p.y2));
+	y = (mlx->p.y1 < 0) ? 0 : mlx->p.y1;
+	while (y <= mlx->p.y2 && y < WIN_HEIGHT)
+	{
+		pxl = -1;
+		if (ft_inscreen(mlx, 'y', y))
+			pxl = WIN_WIDTH * y + (mlx->p.x1 + ((mlx->p.x2 - mlx->p.x1)
+			* (y - mlx->p.y1)) / (mlx->p.y2 - mlx->p.y1));
+		if (pxl >= 0 && pxl < (WIN_WIDTH * WIN_HEIGHT))
+			mlx->img.data[pxl] = color;
+		y++;
+	}
 }
 
-void		ft_draw_map(t_mlx *mlx, char c)
+void		ft_proj(t_mlx *mlx, int *xyz)
 {
-	int 		x;
-	int 		y;
-	int			**tab;
-	t_zoom		zoom;
-	int			gap_x;
-	int			gap_y;
-	int			gap_z;
+	int		c;
 
-	tab = mlx->map.tab;
-	zoom = mlx->zoom;
-	gap_x = WIN_WIDTH / (mlx->map.x_tab + 1);
-	mlx->zoom.gap_x = gap_x;
-	gap_y = WIN_HEIGHT / (mlx->map.y_tab + 1);
-	mlx->zoom.gap_y = gap_y;
-	gap_z = (gap_x + gap_y) / 10;
-	mlx->zoom.gap_z = gap_z;
+	c = 5;
+	if (mlx->proj == 'p')
+	{
+		mlx->p.x1 = mlx->p.offset_x + xyz[0] + (c * xyz[2]) / 10;
+		mlx->p.x2 = mlx->p.offset_x + xyz[3] + (c * xyz[5]) / 10;
+		mlx->p.y1 = mlx->p.offset_y + xyz[1] + (c * xyz[2]) / 20;
+		mlx->p.y2 = mlx->p.offset_y + xyz[4] + (c * xyz[5]) / 20;
+	}
+	if (mlx->proj == 'i')
+	{
+		mlx->p.x1 = mlx->p.offset_x + (c * xyz[0] - c * xyz[1]) / 10;
+		mlx->p.x2 = mlx->p.offset_x + (c * xyz[3] - c * xyz[4]) / 10;
+		mlx->p.y1 = mlx->p.offset_y - xyz[2] + ((c / 2) * xyz[0]
+			+ (c / 2) * xyz[1]) / 10;
+		mlx->p.y2 = mlx->p.offset_y - xyz[5] + ((c / 2) * xyz[3]
+			+ (c / 2) * xyz[4]) / 10;
+	}
+	if (abs(mlx->p.x2 - mlx->p.x1) >= abs(mlx->p.y2 - mlx->p.y1))
+		ft_line_x(mlx, ft_color(mlx, xyz[2], xyz[5]));
+	else
+		ft_line_y(mlx, ft_color(mlx, xyz[2], xyz[5]));
+}
+
+void		ft_xyz(t_mlx *mlx, int x, int y)
+{
+	int xyz[6];
+
+	xyz[0] = x * mlx->p.gap_x;
+	xyz[1] = y * mlx->p.gap_y;
+	xyz[2] = mlx->map.tab[y][x] * mlx->p.gap_z;
+	if (x < (mlx->map.x_tab - 1))
+	{
+		xyz[3] = (x + 1) * mlx->p.gap_x;
+		xyz[4] = y * mlx->p.gap_y;
+		xyz[5] = mlx->map.tab[y][x + 1] * mlx->p.gap_z;
+		ft_proj(mlx, xyz);
+	}
+	if (y < (mlx->map.y_tab - 1))
+	{
+		xyz[3] = x * mlx->p.gap_x;
+		xyz[4] = (y + 1) * mlx->p.gap_y;
+		xyz[5] = mlx->map.tab[y + 1][x] * mlx->p.gap_z;
+		ft_proj(mlx, xyz);
+	}
+}
+
+void		ft_init_map(t_mlx *mlx)
+{
+	int		x;
+	int		y;
+
+	if (mlx->init == 0)
+	{
+		ft_define_gap(mlx);
+		mlx->init = 1;
+		mlx->color = 0;
+	}
+	if (mlx->p.gap_x == 0)
+		mlx->p.gap_x = 1;
+	if (mlx->p.gap_y == 0)
+		mlx->p.gap_y = 1;
+	ft_menu(mlx);
 	y = 0;
 	while (y < mlx->map.y_tab)
 	{
 		x = 0;
 		while (x < mlx->map.x_tab)
 		{
-			if (c == 'i')
-			{
-				if (x < (mlx->map.x_tab - 1))
-					ft_proj_iso(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, (x + 1) * gap_x, y * gap_y, tab[y][x + 1] * gap_z);
-				if (y < (mlx->map.y_tab - 1))
-					ft_proj_iso(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, x * gap_x, (y + 1) * gap_y, tab[y + 1][x] * gap_z);
-			}
-			if (c == 'p')
-			{
-				if (x < (mlx->map.x_tab - 1))
-					ft_proj_p(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, (x + 1) * gap_x, y * gap_y, tab[y][x + 1] * gap_z);
-				if (y < (mlx->map.y_tab - 1))
-					ft_proj_p(mlx, x * gap_x, y * gap_y, tab[y][x] * gap_z, x * gap_x, (y + 1) * gap_y, tab[y + 1][x] * gap_z);
-			}
+			ft_xyz(mlx, x, y);
 			x++;
 		}
 		y++;
-	}
-}
-
-void	ft_swap_xy(int *x1, int *x2, int *y1, int *y2)
-{
-	int	tmp;
-
-	tmp = *x2;
-	*x2 = *x1;
-	*x1 = tmp;
-	tmp = *y2;
-	*y2 = *y1;
-	*y1 = tmp;
-}
-
-void	ft_line(t_mlx *mlx, t_coord *p, int color)
-{
-	int x;
-	int y;
-
-	if (p->x1 > p->x2)
-		ft_swap_xy(&(p->x1), &(p->x2), &(p->y1), &(p->y2));
-	if ((p->x2 - p->x1) > (p->y2 - p->y1))
-	{
-		x = p->x1;
-		while (x <= p->x2)
-		{
-			mlx_pixel_put(mlx->ptr, mlx->wdw, x, p->y1 + ((p->y2 - p->y1) * (x - p->x1 )) / (p->x2 - p->x1), color);
-			x++;
-		}
-	}
-	else if ((p->y2 - p->y1) > (p->x2- p->x1))
-	{
-		y = p->y1;
-		while (y <= p->y2)
-		{
-			mlx_pixel_put(mlx->ptr, mlx->wdw, p->x1 + ((p->x2 - p->x1) * (y - p->y1)) / (p->y2 - p->y1), y, color);
-			y++;
-		}
 	}
 }

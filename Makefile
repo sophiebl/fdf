@@ -6,7 +6,7 @@
 #    By: vimucchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/12 16:38:13 by vimucchi          #+#    #+#              #
-#    Updated: 2019/02/26 12:56:11 by vimucchi         ###   ########.fr        #
+#    Updated: 2019/03/09 17:34:30 by vimucchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ OBJ_PATH = ./
 INC = -I /usr/local/include
 LDFLAGS = -L ./minilibx -L ./libft
 LDLIBS = -lmlx -framework OpenGL -framework AppKit -lft
-CFLAGS = -g3 -Wall -Wextra -Werror 
-CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+CC = gcc 
 SRC = main.c \
 	parser.c \
 	draw.c \
+	key.c \
+	toolbox.c
 
 all: $(NAME)
 
@@ -39,6 +41,7 @@ $(NAME): $(OBJ)
 clean:
 	@rm -f $(OBJ)
 	@make -C libft clean
+	@make -C minilibx clean
 	@echo "\033[32mObjects \033[31mremoved\033[0m"
 
 fclean: clean
